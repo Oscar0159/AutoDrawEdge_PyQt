@@ -1,0 +1,32 @@
+QMainWindow {
+    background-color: #55B9F3;
+}
+
+QWidget#panelwidget{
+    border-radius: 10px;
+    background: #55b9f3;
+}
+
+QPushButton {
+    border-radius: 12px;
+    border-style: none;
+    background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #5BC6FF, stop:1 #4DA7DB);
+	padding: 4px;
+    }
+
+QPushButton:hover {
+    background: #55b9f3;
+    }
+
+QPushButton:pressed {
+    background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #4DA7DB, stop:1 #5BC6FF);
+    }
+
+QLabel{
+	border-radius: 20px;
+    background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #4DA7DB, stop:1 #5BC6FF);
+	}
+
+QLabel#lab_lineNum, #lab_denoiseNum, #lab_blurNum, #lab_clickNum{
+    background: transparent;
+	}
