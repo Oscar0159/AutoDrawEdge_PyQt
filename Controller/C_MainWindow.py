@@ -26,6 +26,7 @@ class MainWindow(QMainWindow):
         self.urlwindow = UrlWindow()
         self.urlwindow.editFibisgedSignal.connect(self.get_url)
         self.capturewidget = CaptureWidget()
+        self.ui.dlabel.dropSignal.connect(self.set_dropImg)
 
         self.adManager = AutoDrawManager()
         self.scManager = ScreenInfoManager()
@@ -163,6 +164,9 @@ class MainWindow(QMainWindow):
         painter.drawRect(rect)
         self.ui.btn_monitor.setIcon(QIcon(drawReginImg))
         self.ui.btn_monitor.setIconSize(QSize(self.ui.btn_monitor.width(), self.ui.btn_monitor.height()))
+
+    def set_dropImg(self):
+        self.adManager.qpixmap2Img(self.ui.dlabel.dropQPixmap)
 
     def get_url(self, url):
         self.adManager.url2Img(url)

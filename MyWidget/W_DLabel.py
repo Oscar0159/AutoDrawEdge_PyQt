@@ -2,13 +2,14 @@ import re
 import sys
 
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout
-from PyQt5.QtCore import Qt, QRect
+from PyQt5.QtCore import Qt, QRect, pyqtSignal
 from PyQt5 import QtGui
 from PyQt5.QtGui import QPixmap, QIcon
 
 
 # drag and drop image label
 class DLabel(QLabel):
+    dropSignal = pyqtSignal()
     def __init__(self, parent=None):
         super(DLabel, self).__init__(parent=parent)
         self.setAcceptDrops(True)
@@ -31,6 +32,7 @@ class DLabel(QLabel):
         file_path = re.sub('file:///', '', file_path)
         self._dropQPixmap = QPixmap(file_path)
         self.update()
+        self.dropSignal.emit()
 
     def clear(self) -> None:
         self.setText('\n\n Drop Image Here \n\n')
