@@ -11,7 +11,6 @@ class Ui_MainWindow(object):
         MainWindow.resize(600, 350)
         MainWindow.setWindowTitle('AutoDraw')
         MainWindow.setFixedSize(MainWindow.width(), MainWindow.height())
-        MainWindow.setWindowFlags(Qt.WindowStaysOnTopHint)
         MainWindow.setWindowIcon(QIcon('images/AutoDrawEdge.ico'))
 
         # QWidget ----------------------------------------------------------------------------

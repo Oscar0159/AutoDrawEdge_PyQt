@@ -98,7 +98,8 @@ class AutoDrawManager:
 
     def edge(self, cvImg):
         if cvImg.size != 0:
-            cvImg = cv2.blur(cvImg, (self._blurIndex, self._blurIndex))
+            if self._blurIndex != 0:
+                cvImg = cv2.blur(cvImg, (self._blurIndex, self._blurIndex))
             cvImg = cv2.cvtColor(cvImg, cv2.COLOR_BGR2GRAY)
             img_edge = cv2.adaptiveThreshold(cvImg, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY,
                                              blockSize=self._lineWeight, C=self._denoiseLevel)
@@ -143,10 +144,13 @@ class AutoDrawManager:
             return cv2.copyMakeBorder(cvImg, top, bottom, left, right, cv2.BORDER_CONSTANT, value=[255, 255, 255])
 
     def updateImg(self):
-        self._resizeImg = self.resize(self._oriImg)
-        self._oriEdgeImg = self.edge(self._oriImg)
-        self._padImg = self.padding(self._resizeImg)
-        self._padEdgeImg = self.edge(self._padImg)
+        if self._oriImg.size != 0:
+            self._resizeImg = self.resize(self._oriImg)
+            self._oriEdgeImg = self.edge(self._oriImg)
+            self._padImg = self.padding(self._resizeImg)
+            self._padEdgeImg = self.edge(self._padImg)
+        else:
+            print('origin image is empty!')
 
     def url2Img(self, url):
         try:

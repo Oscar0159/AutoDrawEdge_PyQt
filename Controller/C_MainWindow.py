@@ -45,13 +45,21 @@ class MainWindow(QMainWindow):
                                               'stop:0 #489DCF, stop:1 #62D5FF);')
             self.ui.btn_stickie.setGraphicsEffect(None)
             self.ui.btn_stickieAfter.setGraphicsEffect(None)
+            self.setWindowFlags(Qt.WindowStaysOnTopHint)
+            self.show()
+            print(self.windowFlags())
         else:
-            self.ui.btn_stickie.setStyleSheet('background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1,'
-                                              'stop:0 #5BC6FF, stop:1 #4DA7DB);')
+            self.ui.btn_stickie.setStyleSheet('''background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+                                              stop:0 #5BC6FF, stop:1 #4DA7DB);
+                                              QPushButton:hover {
+                                              background: #55b9f3;
+                                              }''')
             self.ui.btn_stickie.setGraphicsEffect(QGraphicsDropShadowEffect(blurRadius=5, offset=QPointF(3, 3),
                                                                             color=QColor('#489DCF')))
             self.ui.btn_stickieAfter.setGraphicsEffect(QGraphicsDropShadowEffect(blurRadius=5, offset=QPointF(-3, -3),
                                                                                  color=QColor('#62D5FF')))
+            self.setWindowFlags(self.windowFlags() & ~Qt.WindowStaysOnTopHint)
+            self.show()
 
     @pyqtSlot()
     def on_btn_info_clicked(self):
@@ -61,8 +69,10 @@ class MainWindow(QMainWindow):
     def on_btn_theme_clicked(self):
         if self.ui.btn_theme.isChecked():
             self.ui.btn_theme.setIcon(QIcon(QPixmap('images/sun.png')))
+            print('set dark qss')
         else:
             self.ui.btn_theme.setIcon(QIcon(QPixmap('images/moon.png')))
+            print('set light qss')
 
     @pyqtSlot()
     def on_btn_screenshot_clicked(self):
